@@ -1,0 +1,58 @@
+<p
+  class="text-md font-semibold text-left mb-3 leading-7 text-gray-900 sm:text-2xl sm:truncate"
+>
+  Your Investment as Savings
+</p>
+
+<div
+  *ngIf="options?.items < 1"
+  class="w-12/12 m-auto flex justify-center relative bg-gray-0 pt-4 border border-solid rounded-md h-full border-1 border-neutral-400"
+>
+  <p
+    class="text-md border-dashed p-4 font-semibold text-left mb-3 ml-2 leading-7 text-gray-300 sm:text-2xl sm:truncate"
+  >
+    No declarations found
+  </p>
+</div>
+<div class="w-full">
+  <div
+    class="flex justify-between"
+    *ngFor="let _item of options?.items; let i = index"
+  >
+    <div
+      class="w-10/12 mb-3 z-10 bg-gray-100 relative rounded-full flex justify-between dark:bg-gray-700"
+    >
+      <div
+        class="opacity-20 h-full absolute rounded-full"
+        [style]="
+          'width:' + (_item?.percentage > 100 ? 100 : _item?.percentage) + '%'
+        "
+        [class]="_item?.percentage >= 50 ? 'bg-primary' : 'bg-red-400'"
+      ></div>
+      <p class="p-2 m-2 font-medium text-sm">
+        <span
+          class="rounded-full z-10 mr-2 pl-3 pr-3 max-h-2.5 text-center text-black border-2 border-black p-2"
+        >
+          {{ i + 1 }}
+        </span>
+        {{ _item?.title }}
+      </p>
+      <p class="p-2 m-2 font-medium text-sm">{{ _item?.actualValue }}</p>
+    </div>
+    <div
+      class="w-1/4 ml-2 mb-3 z-10 bg-gray-50 relative rounded-full flex justify-between dark:bg-gray-700"
+    >
+      <p
+        class="cursor-pointer justify-between p-2 pl-4 pr-4 text-center w-full flex items-center"
+      >
+        <img
+          src="../../../../assets/img/icons/edit.svg"
+          (click)="editDataValue(_item)"
+          alt=""
+        />
+        <span class="text-gray-300">|</span>
+        <img src="../../../../assets/img/icons/delete.svg" alt="" />
+      </p>
+    </div>
+  </div>
+</div>

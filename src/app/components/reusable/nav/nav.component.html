@@ -1,0 +1,17 @@
+<div
+  class="flex flex-row bg-grey-lighter justify-between align-middle items-center"
+>
+  <div class="font-semibold flex text- px-4 py-2 m-2 space-x-2 tracking-widest">
+    <span class="-ml-4" *ngIf="typeOfPage > 0" (click)="goBack()">
+      <img src="../../../../assets/img/icons/back.svg" alt="" />
+    </span>
+    {{ data?.language }}
+  </div>
+
+  <div class="text-grey-darker text-center bg-grey-light px-4 py-2 m-2">
+    {{ data?.title }}
+  </div>
+  <div class="text-grey-darker text-center bg-grey-light px-4 py-2 m-2">
+    <img src="../../../../assets/img/icons/user.svg" alt="" />
+  </div>
+</div>

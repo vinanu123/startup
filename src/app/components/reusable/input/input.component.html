@@ -1,0 +1,41 @@
+<!-- The main div containing the dropdown -->
+
+<p class="text-sm mt-4 text-gray-500 mb-1 font-medium">
+  Enter {{ options?.title }} Value
+</p>
+<div
+  class="relative w-full flex align-middle items-center justify-between mt-0 rounded-md border-1"
+>
+  <!-- The div containing the selected value and an icon to visually indicate if the dropdown is open or closed -->
+  <div
+    class="mr-2 relative flex justify-between bg-gray-100 w-fit px-4 py-3 border border-1 border-neutral-700 rounded-full items-center cursor-pointer"
+    [class]="typeOfPage > 0 ? 'w-10/12' : 'w-full'"
+  >
+    <input
+      type="text"
+      [(ngModel)]="value"
+      [placeholder]="'Enter ' + options?.title + ' Value'"
+      (keydown)="numberCheck($event)"
+      (keyup)="CommaFormatted($event)"
+      class="bg-transparent focus:outline-none"
+    />
+  </div>
+
+  <button
+    *ngIf="typeOfPage > 0"
+    type="button"
+    (click)="addValue()"
+    [disabled]="!value ? true : false"
+    class="h-auto w-1/4 w-fit px-4 py-3 rounded-full text-white"
+    [class]="!value ? 'bg-gray-300' : 'bg-primary'"
+  >
+    Add
+  </button>
+</div>
+
+<p
+  *ngIf="options?.excemptionValue > 0"
+  class="text-xs mt-2 text-primary font-semibold"
+>
+  You can have an excemption upto {{ options?.excemptionValue }}
+</p>

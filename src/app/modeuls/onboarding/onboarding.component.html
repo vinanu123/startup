@@ -1,0 +1,75 @@
+<tax-buddy-nav
+  (backEmmiter)="backEmmiterHandler($event)"
+  [data]="navigationdata"
+></tax-buddy-nav>
+<lib-button [data]="'Vinayak'" (send)="senData($event)"></lib-button>
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div
+  class="w-11/12 m-auto relative bg-gray-0 pt-4 border border-solid rounded-xl h-full border-1 border-neutral-400"
+>
+  <div class="ml-3 mr-3">
+    <tax-buddy-card [options]="taxDataStatement"></tax-buddy-card>
+  </div>
+
+  <div
+    class="lg:flex lg:items-center lg:justify-between p-4"
+    *ngIf="pageNumber == pageConfiguration?.page - 1"
+  >
+    <div class="flex-auto">
+      <div class="w-full flex justify-between items-center">
+        <h2
+          class="text-md font-semibold text-left leading-7 text-gray-900 sm:text-2xl sm:truncate"
+        >
+          {{ pageConfiguration?.title }}<br />
+          <span class="text-left text-xs mb-5 text-gray-400">
+            {{ pageConfiguration?.subTitle }} <br />
+          </span>
+        </h2>
+        <span *ngIf="pageConfiguration?.video">
+          <a [href]="pageConfiguration?.video" target="_blank">
+            <img src="../../../assets/img/icons/video.svg" alt="" />
+          </a>
+        </span>
+      </div>
+      <div class="w-full" *ngFor="let _item of pageConfiguration?.fields">
+        <tax-buddy-dropdown
+          *ngIf="_item?.type == 'dropdown'"
+          [options]="_item"
+          (optionSelected)="optionSelected($event)"
+        >
+        </tax-buddy-dropdown>
+
+        <tax-buddy-input *ngIf="_item?.type == 'text'" [options]="_item">
+        </tax-buddy-input>
+        <tax-buddy-input
+          *ngIf="pageConfiguration?.isValueField"
+          [options]="dynamicInput"
+          (inputValueEmitter)="inputValueEmitterHandler($event)"
+        >
+        </tax-buddy-input>
+      </div>
+      <div
+        class="m-0 mt-6"
+        *ngIf="
+          pageConfiguration?.typeOfPage == 'tax_data' &&
+          pageConfiguration?.tax_data
+        "
+      >
+        <hr
+          class="mt-2 mb-2 w-full m-auto border-dashed divide-dashed border-gray-300 border-1.5"
+        />
+
+        <tax-buddy-progress
+          (editEmitter)="editEmitterHandler($event)"
+          [options]="pageConfiguration?.tax_data"
+        ></tax-buddy-progress>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full p-2 bottom-0 justify-center items-center flex">
+    <tax-buddy-button
+      (submitEventEmit)="buttonSubmision($event)"
+    ></tax-buddy-button>
+  </div>
+</div>
